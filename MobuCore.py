@@ -379,7 +379,7 @@ def DeleteTake(take = None):
         take = FBSystem().CurrentTake
     take.FBDelete()
 
-# Search for a take using the take name then copy that take. Can search using wildcards to delete multiple takes, but this is disabled by default.
+# Search for a take using the take name then delete that take. Can search using wildcards to delete multiple takes, but this is disabled by default.
 def DeleteTakeByName(name, wildcardSearch = False):
     for take in FBSystem().Scene.Takes:
         if wildcardSearch:

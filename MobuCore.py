@@ -290,8 +290,8 @@ def CreateNewPose(name = None, character = None):
     if character:
         if not name:
             name = "New Pose 1"
-            pose = FBCharacterPose(name)
-            pose.CopyPose(character)
+        pose = FBCharacterPose(name)
+        pose.CopyPose(character)
 
 # Searches for a pose in Pose Controls with a specific name and returns that pose (uses wildcard search by default).
 def GetPoseByName(name, wildcardSearch = True):

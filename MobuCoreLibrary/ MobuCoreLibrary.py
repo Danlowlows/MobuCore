@@ -1,5 +1,8 @@
 '''
-MobuCore is a library of functions for common scripting tasks in Autodesk Motionbuilder. It is created by Dan Lowe. You can reach Dan Lowe on Twitter at https://twitter.com/danlowlows (at time of writing, direct messages are open).
+Core functions library for the MobuCore package. Contains functions for common scripting tasks in Autodesk Motionbuilder.
+_________________________________________________________________________________________________________________________
+
+This script was written by Dan Lowe as part of the MobuCore package. You can reach Dan Lowe on Twitter at https://twitter.com/danlowlows (at time of writing, direct messages are open).
 
 MobuCore is made available under the following license terms:
 
@@ -171,7 +174,7 @@ def GetControlRigEffectors(character = None):
         return controlRigEffectors
 
 '''
-The following are functions for getting character extention objects for a given character.
+The following are functions for getting character extension objects for a given character.
 '''
 
 # Gets all referened objects for a given character extension.
@@ -279,11 +282,25 @@ def FastPlotSelected(allTakes = False):
             objList = [objList]
         FastPlotList(objList, allTakes)
 
+# Plots a given character, or if no character is given, the current character.
+def PlotToCharacter(character = None):
+    characterModels = GetCharacterEffectorsAndExtensions(character)
+    FastPlotList(characterModels)
+    
 '''
 The following functions are for dealing with poses.
 '''
 
 # Creates a new pose in Pose Controls from the current character pose.
+def CreateNewPose(name = None, character = None):
+    if not character:
+        character = FBApplication().CurrentCharacter
+    if character:
+        if not name:
+            name = "New Pose 1"
+        pose = FBCharacterPose(name)
+        pose.CopyPose(character)
+
 def CreateNewPose(name = None, character = None):
     if not character:
         character = FBApplication().CurrentCharacter
@@ -379,7 +396,7 @@ def DeleteTake(take = None):
         take = FBSystem().CurrentTake
     take.FBDelete()
 
-# Search for a take using the take name then delete that take. Can search using wildcards to delete multiple takes, but this is disabled by default.
+# Search for a take using the take name then copy that take. Can search using wildcards to delete multiple takes, but this is disabled by default.
 def DeleteTakeByName(name, wildcardSearch = False):
     for take in FBSystem().Scene.Takes:
         if wildcardSearch:
@@ -713,7 +730,7 @@ def GetBoxFromRelationByName(constraint, boxName):
         if box.Name == boxName:
             return box
 
-# Repositins a relations box.
+# Repositions a relations box.
 def RepositionBox(constraint, boxName, boxXPos, boxYPos):
     box = GetBoxFromRelationByName(constraint, boxName)
     constraint.SetBoxPosition(box, boxXPos, boxYPos)

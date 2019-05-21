@@ -1,3 +1,6 @@
+NOTE: The previous library of functions is still here. It's just moved to the \MobuCore\MobuCoreLibrary\ folder.
+__________________________________________________________________________
+
 MobuCore is a collection of python scripts and functions for common tasks in Autodesk Motionbuilder.
 
 MobuCore was written by Dan Lowe, who you can reach on Twitter at https://twitter.com/danlowlows (at time of writing, direct messages are open).

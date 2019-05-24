@@ -80,7 +80,8 @@ def GetPercentageOfChangeValues(spanValues):
     totalBaseLayerChange = sum(changeValues)
     percentageValues = []
     for i in range(len(changeValues)):
-        percentageValues.append([spanValues[i][0], (100.0 / totalBaseLayerChange) * changeValues[i]])
+        if totalBaseLayerChange != 0:
+            percentageValues.append([spanValues[i][0], (100.0 / totalBaseLayerChange) * changeValues[i]])
     return percentageValues, totalBaseLayerChange
 
 # The main adjustment blend function that does everything else. This is what you'd run if you were just adjustment blending a single object.

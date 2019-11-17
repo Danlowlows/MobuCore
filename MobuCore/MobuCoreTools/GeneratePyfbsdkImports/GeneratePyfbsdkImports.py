@@ -3,6 +3,7 @@ def ReadFileToList(filePath):
         lineList = f.readlines()
     return lineList
 
+# Replace pythonFilePath with your file path and run this function.
 def GeneratePyfbsdkImports(pythonFilePath):
     lines = ReadFileToList(pythonFilePath)
     fbNames = []

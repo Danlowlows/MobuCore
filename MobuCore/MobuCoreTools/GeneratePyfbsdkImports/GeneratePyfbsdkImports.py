@@ -23,4 +23,4 @@ def GeneratePyfbsdkImports(pythonFilePath):
     except:
         pass
     fbNames = list(dict.fromkeys(fbNames))
-    print str(fbNames).replace("[","").replace("]","").replace("'","")
+    print(str(fbNames).replace("[","").replace("]","").replace("'",""))

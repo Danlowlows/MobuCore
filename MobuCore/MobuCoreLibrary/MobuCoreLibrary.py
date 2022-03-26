@@ -109,7 +109,7 @@ def GetSelected(sceneObjectsOnly = True):
             else:
                 foundObjects.append(obj)
     if len(foundObjects) == 0:
-        print 'No objects selected'
+        print('No objects selected')
     elif len(foundObjects) == 1:
         foundObjects = foundObjects[0]
     return foundObjects
@@ -277,14 +277,14 @@ def LoadByteifiedJson(jsonText):
     )
 
 def _byteify(data, ignoreDicts = False):
-    if isinstance(data, unicode):
+    if isinstance(data, str):
         return data.encode('utf-8')
     if isinstance(data, list):
         return [ _byteify(item, ignoreDicts = True) for item in data ]
     if isinstance(data, dict) and not ignoreDicts:
         return {
             _byteify(key, ignoreDicts = True): _byteify(value, ignoreDicts = True)
-            for key, value in data.iteritems()
+            for key, value in data.items()
         }
     return data
 
@@ -325,7 +325,7 @@ def GetControlRigFKEffectors(character = None):
         character = FBApplication().CurrentCharacter
     fkEffectors = []
     if character:
-        for nodeId in FBBodyNodeId.values.itervalues():
+        for nodeId in FBBodyNodeId.values.values():
             if nodeId not in [FBBodyNodeId.kFBInvalidNodeId, FBBodyNodeId.kFBLastNodeId]:
                 effector = character.GetCtrlRigModel(nodeId)
                 if effector:
@@ -342,7 +342,7 @@ def GetControlRigIKEffectors(character = None):
     if character:
         ctrlRig = GetControlRigForCharacter(character)
         if ctrlRig:
-            for nodeId in FBEffectorId.values.itervalues():
+            for nodeId in FBEffectorId.values.values():
                 if nodeId not in [FBEffectorId.kFBInvalidEffectorId, FBEffectorId.kFBLastEffectorId]:
                     effector = ctrlRig.GetIKEffectorModel(nodeId, 0)
                     if effector:
@@ -468,7 +468,7 @@ def GetSpeed(obj, frameRangeStart = None, frameRangeEnd = None):
         return speed, startTrans, endTrans, distance
     else:
         return None
-        print "Speed not found for %s" % (obj.LongName)
+        print("Speed not found for %s" % (obj.LongName))
 
 '''
 The following function is for clearing the animation on an object.
@@ -588,7 +588,7 @@ def FastPlotList(objectsToPlot, allTakes = False):
             try: # Added to support Mobu 2016 and earlier which didn't have plot options as an argument for this.
                 take.PlotTakeOnObjects(PlotOptions(allTakes), objectsToPlot)
             except:
-                print "Regular plot method failed, switching to Motionbuilder 2016 plot method."
+                print("Regular plot method failed, switching to Motionbuilder 2016 plot method.")
                 take.PlotTakeOnObjects(FBTime(0,0,0,1),objectsToPlot)
             #SelectList(objList)
         else:
@@ -1078,7 +1078,7 @@ def SetConstraintReference(constraint, obj, referenceName):
 # Prints the reference names for a given constraint (not something you'd use directly in scripts but useful debug function for figuring out the reference name for new constraint types).
 def PrintConstraintReferenceNames(constraint):
     for i in range(constraint.ReferenceGroupGetCount()):
-        print constraint.ReferenceGroupGetName(i)
+        print(constraint.ReferenceGroupGetName(i))
 
 # A generic function for creating Position, Rotation, and Parent/Child constraints. This isn't as clean as it could be, but there was a lot of duplicate code for these constraint types so I wanted to try and share as much as possible.
 def GenericConstraint(constraintType, parent, child, active = True, snap = False, zero = True):
@@ -1285,7 +1285,7 @@ def AddBoxToRelationConstraint(constraint, boxCategory, boxType, boxXPos = 0, bo
         constraint.SetBoxPosition(box, boxXPos, boxYPos)
         return box
     else:
-        print 'Box type "%s" not found' % (boxType)
+        print('Box type "%s" not found' % (boxType))
 
 # Adds an object to a relations constraint as either a source or a target object.
 def AddObjToRelation(constraint, obj, objIsSource = True, boxXPos = 0, boxYPos = 0):
@@ -1427,7 +1427,7 @@ def GetTitleSpace(title, titleWidth = 50):
 def PrintTimeStampList(timeStampList):
     totalTime = timeStampList[-1][1] - timeStampList[0][1]
     totalSeconds = totalTime.total_seconds()
-    print "\nTime Stamp Log..."
+    print("\nTime Stamp Log...")
     longestString = 0
     for timeStamp in timeStampList:
         stringLength = len(timeStamp[0])
@@ -1436,8 +1436,8 @@ def PrintTimeStampList(timeStampList):
     bufferAmount = longestString + 5
     for timeStamp in timeStampList:
         percentage = (100 / totalSeconds) * timeStamp[2].total_seconds()
-        print "Name: %s%sTime: %s%sDelta: %s%sPercent: %s" % (timeStamp[0], GetTitleSpace(str(timeStamp[0]), bufferAmount), timeStamp[1].time(), GetTitleSpace(str(timeStamp[1].time()), 20), timeStamp[2], GetTitleSpace(str(timeStamp[2]), 18), percentage)
-    print "Total Time: %s" % (totalTime)
+        print("Name: %s%sTime: %s%sDelta: %s%sPercent: %s" % (timeStamp[0], GetTitleSpace(str(timeStamp[0]), bufferAmount), timeStamp[1].time(), GetTitleSpace(str(timeStamp[1].time()), 20), timeStamp[2], GetTitleSpace(str(timeStamp[2]), 18), percentage))
+    print("Total Time: %s" % (totalTime))
     
 '''
 Function for getting the distance between objects.

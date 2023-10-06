@@ -4,6 +4,10 @@ Functions for automating common tasks relating to Story clips.
 MobuCoreLibrary functions are required for this script.
 ______________________________________________________________
 
+This script was written by Dan Lowe as part of the MobuCore package.  You can reach Dan Lowe on Twitter at https://twitter.com/danlowlows (at time of writing, direct messages are open).
+
+MobuCore is made available under the following license terms:
+
 MIT License
 
 Copyright (c) 2023 Dan Lowe
